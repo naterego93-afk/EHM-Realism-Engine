@@ -8,6 +8,8 @@ A lightweight runtime realism & stability engine for Eastside Hockey Manager (St
 - **Global World & Crash Protection**: Unlocks 127 retained nations at database creation, patches empty tournament stage `malloc(0)` exits (`comp_stats.cpp`), suppresses non-fatal assertion popups, and enables 4GB Large Address Aware memory support.
 
 ## Installation
-1. Extract this ZIP anywhere on your PC.
-2. Right-click `Install_EHM_Realism.ps1` -> **Run with PowerShell**.
-3. Launch Eastside Hockey Manager normally via Steam!
+1. Download and extract **EHM_Realism_Engine_GitHub_v1.0.zip** from the Releases section on the right.
+2. Double-click **`Install_EHM_Realism.exe`** (it automatically detects your Steam EHM folder, backs up your vanilla files, and applies the 4GB memory patch).
+3. Launch **Eastside Hockey Manager** normally through Steam!
+
+*(To uninstall at any time, simply double-click **`Uninstall_EHM_Realism.exe`**.)*
