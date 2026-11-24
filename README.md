@@ -1,4 +1,4 @@
-# EHM Realism Engine v1.0.4
+# EHM Realism Engine v1.0.5
 A lightweight runtime realism & stability engine for Eastside Hockey Manager (Steam 1.5).
 
 > **Save warning:** saving while the mod is active writes the modified salary cap, progression and world settings into that `.sav` file. Back up your saves before testing.
@@ -11,11 +11,11 @@ A lightweight runtime realism & stability engine for Eastside Hockey Manager (St
 - **World & crash protection:** 127 retained nations at database creation, U20/senior national pool refills, the empty tournament stage `malloc(0)` crash fixed (comp_stats.cpp), non-fatal assertion popups suppressed, 4GB Large Address Aware flag.
 
 ## Install (Windows)
-1. Extract **EHM_Realism_Engine_v1.0.4.zip** (don't run anything from inside the zip).
+1. Extract **EHM_Realism_Engine_v1.0.5.zip** (don't run anything from inside the zip).
 2. Close Eastside Hockey Manager, then double-click **Install_EHM_Realism.exe**. It finds your game through Steam's library list (any drive), backs up `ehm.exe` once, and tells you exactly what it did.
 3. Launch the game through Steam.
 
-**Check it loaded:** open `ehm_hook.log` in the game folder. The first line shows `v1.0.4`, followed by 24 `INSTALLED` lines and 3 `PATCHED` lines. No log file means the mod did not load.
+**Check it loaded:** open `ehm_hook.log` in the game folder. The first line shows `v1.0.5`, followed by 24 `INSTALLED` lines and 3 `PATCHED` lines. No log file means the mod did not load.
 
 ## Install (Linux / Steam Deck / Proton)
 Run the installer once through Proton (or copy the contents of `ModFiles` next to `ehm.exe` by hand), then set the Steam launch option:
@@ -33,7 +33,7 @@ Everything is in `ehm_hook.cfg` in the game folder (100 = vanilla for any `_pct`
 | Stat | Real NHL | Setting that moves it |
 |---|---|---|
 | Goals per team per game | 3.08 / 3.16 | `goalie_save_scale_pct` (through save %) |
-| League save % | .896 / .891 | `goalie_save_scale_pct` (default 99; 1 point = about 1% fewer saves) |
+| League save % | .896 / .891 | `goalie_save_scale_pct` (default 98; lower = fewer saves) |
 | Shots per team per game | 27.6 / 27.3 | no direct setting (game engine) |
 | Power plays per team per game | 2.88 / 3.11 | `penalty_call_pct` (100 = vanilla) |
 | Salary cap / floor | $95.5M / $70.6M, then $104M / $76.9M | `nhl_salary_cap_usd`, `nhl_salary_floor_usd` |
