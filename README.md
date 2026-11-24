@@ -20,7 +20,7 @@ Every number here was measured in the game: NHL rows from the NHL standings of a
 ## Features
 - **Match engine:** shot & passing attribute weights (55/55), penalty rates calibrated to the NHL, fewer penalties in the playoffs, more in rivalry games, coaches adapt tactics in-game.
 - **Realistic aging:** skaters stop growing around 27 and decline from 28 (vanilla: 32-34); goalies later. Elite prospects (potential 135+) develop 25% faster; stars (ability 140+) aged 29-35 decline 45% slower. A share of 17-18-year-old prospects, more of them goalies, get a one-time potential boost so the game keeps producing NHL-calibre goalies.
-- **Salary cap:** starts at the real 2026-27 NHL cap ($104M, $76.9M floor) for new games and stays at the values in `ehm_hook.cfg`.
+- **Salary cap:** `nhl_salary_cap_usd` / `nhl_salary_floor_usd` (default: real 2026-27 NHL, $104M / $76.9M) are minimums the mod applies when the game does its yearly cap update at the season rollover. The first season of a new game still shows the database's cap, and a cap the game raises above these values is left alone.
 - **World & crash protection:** 127 retained nations at database creation, U20/senior national pool refills, the empty tournament stage `malloc(0)` crash fixed (comp_stats.cpp), non-fatal assertion popups suppressed, 4GB Large Address Aware flag.
 
 ## Install (Windows)
