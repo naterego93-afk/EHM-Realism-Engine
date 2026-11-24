@@ -4,33 +4,33 @@ A lightweight runtime realism & stability engine for Eastside Hockey Manager (St
 > **Save warning:** saving while the mod is active writes the modified salary cap, progression and world settings into that `.sav` file. Back up your saves before testing.
 
 ## How it is balanced
-Like OOTP's "lock league totals": the league-wide environment is calibrated to the real NHL three-season average (2023-24 to 2025-26, hockey-reference), and player ratings decide everything else. The same engine runs every league, so differences between leagues come from their players, not from per-league tuning.
+Like OOTP's "lock league totals": the league-wide environment targets the real NHL three-season average (2023-24 to 2025-26, hockey-reference), and player ratings decide everything else. The same engine runs every league, so differences between leagues come from their players, not from per-league tuning.
 
-The "measured" numbers come from the game: NHL rows from the NHL standings of a simulated 2030-31 season, all-leagues rows from the mod's own counters over every league the save simulates. The v1.1.0 column is estimated from measured sensitivities (how much each setting moved scoring), not yet from a full season at the final values.
+Every number here was measured in the game: NHL rows from the NHL standings of a simulated 2030-31 season, all-leagues rows from the mod's own counters over every league the save simulates.
 
-| Per team per game | Real NHL | Before (measured) | v1.1.0 (estimated) |
-|---|---|---|---|
-| Goals, NHL standings | 3.06 | 3.34 (618 NHL games, goalie scale 98) | 3.05-3.10 |
-| Goals, all leagues | n/a | 3.20 (v1.0.5, 13,911 games) | about 2.9 |
-| Power-play goals, all leagues | 0.61 (NHL) | 0.77 (v1.0.5) | about 0.60 |
-| Penalties drawn, all leagues | 2.87 (NHL) | 3.49 (v1.0.5) | 2.9-3.0 (measured 2.93 at `penalty_call_pct` 79) |
+| Per team per game | Real NHL | v1.0.x | Previous release | This release |
+|---|---|---|---|---|
+| Goals, all leagues | n/a | 3.20 (13,911 games) | 3.69 (4,229 games) | 3.12 (404 games) |
+| Goals, NHL standings | 3.06 | 3.34 (618 NHL games, penalties at 79) | not measured | about 3.3 (estimated: same all-league level as the 3.34 run) |
+| Power-play goals, all leagues | 0.61 (NHL) | 0.77 | 0.75 | 0.65 (868 games) |
+| Penalties drawn, all leagues | 2.87 (NHL) | 3.49 | 2.92 | 2.86 (868 games) |
 
-What changed to get there: `penalty_call_pct` 100 -> 79, `goalie_save_scale_pct` 98 -> 115, `skill_contrast_pct` 110 x `ai_skill_iq_pct` 110 -> 100 x 100 (see the release notes for the measurements behind each one). If your league's season ends up off, the Settings section says which value to move.
+**Known gap:** NHL scoring runs about 8% above the real league. Of the settings tested, `goalie_save_scale_pct` (90, 98, 100) and `shot_speed_scale_pct` (90) did not move scoring, and `goalie_save_scale_pct` above 100 raised it sharply, so v1.1.1 caps it at 100. Penalties are on target.
 
 ## Features
-- **Match engine:** shot & passing attribute weights (55/55), calibrated scoring and penalty rates, fewer penalties in the playoffs, more in rivalry games, coaches adapt tactics in-game.
+- **Match engine:** shot & passing attribute weights (55/55), penalty rates calibrated to the NHL, fewer penalties in the playoffs, more in rivalry games, coaches adapt tactics in-game.
 - **Realistic aging:** skaters stop growing around 27 and decline from 28 (vanilla: 32-34); goalies later. Elite prospects (potential 135+) develop 25% faster; stars (ability 140+) aged 29-35 decline 45% slower. A share of 17-18-year-old prospects, more of them goalies, get a one-time potential boost so the game keeps producing NHL-calibre goalies.
 - **Salary cap:** starts at the real 2026-27 NHL cap ($104M, $76.9M floor) for new games and stays at the values in `ehm_hook.cfg`.
 - **World & crash protection:** 127 retained nations at database creation, U20/senior national pool refills, the empty tournament stage `malloc(0)` crash fixed (comp_stats.cpp), non-fatal assertion popups suppressed, 4GB Large Address Aware flag.
 
 ## Install (Windows)
-1. Extract **EHM_Realism_Engine_v1.1.0.zip** (don't run anything from inside the zip).
+1. Extract **EHM_Realism_Engine_v1.1.1.zip** (don't run anything from inside the zip).
 2. Close Eastside Hockey Manager, then double-click **Install_EHM_Realism.exe**. It finds your game through Steam's library list (any drive), backs up `ehm.exe` once, and tells you exactly what it did.
 3. Launch the game through Steam.
 
-**Check it loaded:** open `ehm_hook.log` in the game folder. The first line shows `v1.1.0`, followed by 24 `INSTALLED` lines and 3 `PATCHED` lines. No log file means the mod did not load.
+**Check it loaded:** open `ehm_hook.log` in the game folder. The first line shows `v1.1.1`, followed by 24 `INSTALLED` lines and 3 `PATCHED` lines. No log file means the mod did not load.
 
-**Upgrading from v1.0.x:** your `ehm_hook.cfg` is kept. Balance settings that are still at an older release's default are moved to the v1.1.0 calibration; anything you changed yourself, and your salary cap, stay as they are. The installer says which happened and keeps the old file as `ehm_hook.cfg.bak_pre_v110`.
+**Upgrading from v1.0.x:** your `ehm_hook.cfg` is kept. Balance settings that are still at an older release's default are moved to the v1.1.1 defaults; anything you changed yourself, and your salary cap, stay as they are. The installer says which happened and keeps the old file as `ehm_hook.cfg.bak_pre_v110`.
 
 ## Install (Linux / Steam Deck / Proton)
 Run the installer once through Proton (or copy the contents of `ModFiles` next to `ehm.exe` by hand), then set the Steam launch option:
@@ -51,7 +51,7 @@ Everything is in `ehm_hook.cfg` in the game folder (100 = vanilla for any `_pct`
 
 `high_priority=1` runs the game at High CPU priority for faster sims. It is off by default because it can starve other programs.
 
-**Check your own league:** after a simulated season, compare the NHL standings (goals for / games played) with 3.06. Too many goals: raise `goalie_save_scale_pct` (default 115) by 2, about -1% goals. Too many power-play goals: lower `penalty_call_pct` by 5.
+**Check your own league:** after a simulated season, compare the NHL standings (goals for / games played) with 3.06. Too many power-play goals: lower `penalty_call_pct` by 5. `goalie_save_scale_pct` (default 100) is capped at 100.
 
 ## FAQ
 **Can it make the game 64-bit?** No. `ehm.exe` is a closed 32-bit program; only the developer can rebuild it as 64-bit. It also would not help: a full world sim measured 0.7 GB of memory (peak) against the 4 GB the mod's Large Address Aware flag already allows.
